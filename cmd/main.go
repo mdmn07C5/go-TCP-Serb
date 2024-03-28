@@ -1,7 +1,7 @@
 package main
 
-import "go-TCP-Serb/serbs"
+import "go-TCP-Serb/tcp"
 
 func main() {
-	serbs.StartTCPSerb()
+	tcp.StartTCPSerb()
 }

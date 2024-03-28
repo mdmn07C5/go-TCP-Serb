@@ -1,4 +1,4 @@
-package serbs
+package tcp
 
 import (
 	"bufio"
