@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "go-TCP-Serb/serbs"
 
 func main() {
-	fmt.Println("peepeepoopoo")
+	serbs.StartTCPSerb()
 }
