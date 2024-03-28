@@ -1,10 +1,11 @@
 package serbs
 
 import (
+	"bufio"
 	"fmt"
-	"io"
 	"log"
 	"net"
+	"time"
 )
 
 const (
@@ -26,9 +27,23 @@ func StartTCPSerb() {
 			log.Println(err)
 		}
 
-		io.WriteString(conn, "\nhenlo?\n")
-		fmt.Fprintln(conn, "PEEPEE")
-		fmt.Fprintf(conn, "%v", "POOPOO")
-		conn.Close()
+		go handle(conn)
 	}
+}
+
+func handle(conn net.Conn) {
+	defer conn.Close()
+
+	err := conn.SetDeadline(time.Now().Add(10 * time.Second))
+	if err != nil {
+		fmt.Println("Connection timed out.")
+	}
+
+	scanner := bufio.NewScanner(conn)
+	for scanner.Scan() {
+		line := scanner.Text()
+		fmt.Println(line)
+	}
+
+	fmt.Printf("TH'END (ended at %v)\n", time.Now().Format("03:04:05"))
 }
