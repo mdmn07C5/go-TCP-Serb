@@ -3,22 +3,29 @@ package tcp
 import (
 	"fmt"
 	"go-TCP-Serb/util"
-	"io"
 	"log"
 	"net"
+	"time"
 )
 
-func StartTCPSerbian() {
+func StartTCPSerbian(i int) {
+	time.Sleep(5 * time.Second)
 	conn, err := net.Dial(util.TYPE, util.HOST+":"+util.PORT)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer conn.Close()
 
-	bytes, err := io.ReadAll(conn)
-	if err != nil {
-		log.Fatal(err)
+	if i%2 == 0 {
+		fmt.Fprintln(conn, "PEEPEE")
+	} else {
+		fmt.Fprintln(conn, "POOPOO")
 	}
 
-	fmt.Println(string(bytes))
+	// bytes, err := io.ReadAll(conn)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// fmt.Println(string(bytes))
 }

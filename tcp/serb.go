@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"go-TCP-Serb/util"
-	"io"
 	"log"
 	"net"
 	"time"
@@ -23,7 +22,6 @@ func StartTCPSerb() {
 			log.Println(err)
 		}
 
-		io.WriteString(conn, "PEEPEEPOOPOO")
 		go handle(conn)
 	}
 }
@@ -39,7 +37,11 @@ func handle(conn net.Conn) {
 	scanner := bufio.NewScanner(conn)
 	for scanner.Scan() {
 		line := scanner.Text()
-		fmt.Println(line)
+		if line == "PEEPEE" {
+			fmt.Println(line + "POOPOO")
+		} else {
+			fmt.Println(line + "PEEPEE")
+		}
 	}
 
 	fmt.Printf("TH'END (ended at %v)\n", time.Now().Format("03:04:05"))
