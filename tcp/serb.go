@@ -3,19 +3,15 @@ package tcp
 import (
 	"bufio"
 	"fmt"
+	"go-TCP-Serb/util"
+	"io"
 	"log"
 	"net"
 	"time"
 )
 
-const (
-	HOST = "localhost"
-	PORT = "8080"
-	TYPE = "tcp"
-)
-
 func StartTCPSerb() {
-	listener, err := net.Listen(TYPE, HOST+":"+PORT)
+	listener, err := net.Listen(util.TYPE, util.HOST+":"+util.PORT)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -27,6 +23,7 @@ func StartTCPSerb() {
 			log.Println(err)
 		}
 
+		io.WriteString(conn, "PEEPEEPOOPOO")
 		go handle(conn)
 	}
 }
